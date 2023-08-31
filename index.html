@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculdora</title>
+    
+    <style>
+        :root {
+    --ciano--: aquamarine;
+    --black: rgb(34, 34, 34);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-shadow: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.input {
+    font-size: 22px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    --input-focus: #2d8cf0;
+    --font-color: #323232;
+    --font-color-sub: #666;
+    --bg-color: #fff;
+    --main-color: #323232;
+    width: 250px;
+    height: 350px;
+    border-radius: 5px;
+    border: 2px solid #323232;
+    background-color: aquamarine;
+    box-shadow: 4px 4px #323232;
+    font-size: 15px;
+    font-weight: 600;
+    color: #323232;
+    padding: 5px 10px;
+    outline: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.buttons h1 {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.buttons input::placeholder {
+    color: var(--black--);
+    text-align: center;
+    font-size: 22px;
+}
+
+.buttons input {
+    margin: 10px;
+    height: 45%;
+    border: 2px solid var(--black);
+    border-radius: 20px;
+
+}
+
+.click {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.click button {
+    font-size: 24px;
+    margin: 1px;
+    background-color: transparent;
+    color: var(--black--);
+    border: none;
+    border: 2px solid var(--black);
+    border-radius: 25px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.click button:hover {
+    background-color: var(--black);
+    color: var(--ciano--);
+    border: 2px solid var(--ciano--);
+    border-radius: 25px;
+    transition-duration: 1s;
+
+}
+
+.igual {
+    font-size: 24px;
+    background-color: transparent;
+    color: var(--black--);
+    border: 2px solid var(--black);
+    border-radius: 25px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 5px 10px
+}
+.igual:hover {
+    background-color: var(--black);
+    color: var(--ciano--);
+    border: 2px solid var(--ciano--);
+    border-radius: 25px;
+    transition-duration: 1s;
+
+}
+    </style>
+    
+    <script>
+        
+
+        let valorAtual = "";
+        let operadorAtual = "";
+        let primeiroOperador = "";
+
+        function valor(num) {
+            valorAtual += num;
+            document.getElementById("result").value = valorAtual;
+        }
+
+        function operador(op) {
+            operadorAtual = op;
+            primeiroOperador = valorAtual;
+            valorAtual = "";
+        }
+
+        function calcular() {
+            const segundoOperador = valorAtual;
+            let resultado;
+
+            switch (operadorAtual) {
+                case 'soma':
+                    resultado = parseFloat(primeiroOperador) + parseFloat(segundoOperador);
+                    break;
+
+                case "subtracao":
+                    resultado = parseFloat(primeiroOperador) - parseFloat(segundoOperador);
+                    break;
+
+                case "multiplicacao":
+                    resultado = parseFloat(primeiroOperador) * parseFloat(segundoOperador);
+                    break;
+
+                case "divisao":
+                    resultado = parseFloat(primeiroOperador) / parseFloat(segundoOperador);
+                    break;
+            }
+            document.getElementById("result").value = resultado;
+            valorAtual = resultado.toString();
+            operadorAtual = "";
+            primeiroOperador = "";
+        }
+        function limpa() {
+            valorAtual = "";
+            document.getElementById("result").value = "";
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="buttons">
+        <h1>Calculadora</h1>
+        <input type="text"  id="result" class="input" readonly>
+        <div class="click">
+        
+                <button onclick="valor('1')">1</button>
+                <button onclick="valor('2')">2</button>
+                <button onclick="valor('3')">3</button>
+                <button onclick="valor('4')">4</button>
+                <button onclick="valor('5')">5</button>
+                <button onclick="valor('6')">6</button>
+                <button onclick="valor('7')">7</button>
+                <button onclick="valor('8')">8</button>
+                <button onclick="valor('9')">9</button>
+                <button onclick="valor('0')">0</button>
+        
+            
+                <button onclick="operador('soma')">+</button>
+                <button onclick="operador('subtracao')">-</button>
+                <button onclick="operador('multiplicacao')">*</button>
+                <button onclick="operador('divisao')">/</button>
+                <button onclick="limpa()">CE</button>
+              
+         </div>
+         <button onclick="calcular()" class="igual">=</button>
+    </div>
+
+</body>
+
+</html>
